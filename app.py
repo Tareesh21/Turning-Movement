@@ -13,11 +13,11 @@ try:
 except Exception as e:
     st.error(f"❌ Error loading Google Cloud credentials: {e}")
 
-client = bigquery.Client(project="proj-452520") 
+client = bigquery.Client(project="proj-452520", timeout=60) 
 
 query = """
 SELECT * FROM `proj-452520.TMC.TurningMC`
-LIMIT 5000
+LIMIT 1000
 """
 df = client.query(query).to_dataframe()
 
