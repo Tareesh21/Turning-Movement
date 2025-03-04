@@ -65,7 +65,7 @@ top_intersections = (
 )
 
 fig_bar = px.bar(top_intersections, x="INTNAME", y="AUTONBL",
-                 labels={"INTNAME": "Intersection", "AUTONBL": "Total Vehicle Count"},
+                 labels={"INTNAME": "Intersection Name", "AUTONBL": "Total Vehicle Count"},
                  title="Top 10 Intersections by Traffic Volume")
 st.plotly_chart(fig_bar, use_container_width=True)
 
