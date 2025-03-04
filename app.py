@@ -107,6 +107,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Add space before the ML prediction section
+st.markdown("<br><br>", unsafe_allow_html=True)
+
 # ✅ Traffic Volume Prediction Using BigQuery ML
 st.subheader("🚀 Predict Future Traffic Volume Using ML")
 
