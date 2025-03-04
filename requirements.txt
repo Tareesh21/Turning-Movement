@@ -8,4 +8,5 @@ numpy
 plotly
 pyarrow
 db-dtypes
+pandas_gbq
 
