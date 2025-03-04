@@ -9,4 +9,5 @@ plotly
 pyarrow
 db-dtypes
 pandas_gbq
-
+streamlit-folium 
+folium  
