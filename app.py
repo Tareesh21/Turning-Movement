@@ -13,7 +13,7 @@ try:
 except Exception as e:
     st.error(f"❌ Error loading Google Cloud credentials: {e}")
 
-client = bigquery.Client(project="proj-452520", timeout=60) 
+client = bigquery.Client(project="proj-452520") 
 
 query = """
 SELECT * FROM `proj-452520.TMC.TurningMC`
