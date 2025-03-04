@@ -12,7 +12,6 @@ try:
     service_account_info = st.secrets["gcp_service_account"]
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
     client = bigquery.Client(credentials=credentials, project=service_account_info["project_id"])
-    st.write("✅ Successfully connected to Google BigQuery!")
 except Exception as e:
     st.error(f"❌ Error loading Google Cloud credentials: {e}")
     st.stop()  # Stop execution if authentication fails
