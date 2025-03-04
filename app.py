@@ -7,6 +7,7 @@ client = bigquery.Client(project="proj-452520")
 
 query = """
 SELECT * FROM `proj-452520.TMC.TurningMC`
+LIMIT 5000
 """
 df = client.query(query).to_dataframe()
 
