@@ -13,13 +13,15 @@ try:
 except Exception as e:
     st.error(f"❌ Error loading Google Cloud credentials: {e}")
 
-client = bigquery.Client(project="proj-452520") 
+# client = bigquery.Client(project="proj-452520") 
 
+st.write("Fetching data from BigQuery...")
 query = """
 SELECT * FROM `proj-452520.TMC.TurningMC`
 LIMIT 1000
 """
 df = client.query(query).to_dataframe()
+st.write("✅ Data fetched successfully!")
 
 df['LATITUDE'] = pd.to_numeric(df['LATITUDE'], errors='coerce')
 df['LONGITUDE'] = pd.to_numeric(df['LONGITUDE'], errors='coerce')
