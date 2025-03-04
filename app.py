@@ -5,7 +5,8 @@ import plotly.express as px
 from google.oauth2 import service_account
 
 # ✅ Set Streamlit Page Config
-st.set_page_config(page_title="Traffic Movement Analysis Dashboard", layout="wide")
+st.set_page_config(page_title="Turning Movement Analysis Dashboard", layout="wide")
+st.markdown("**Analyzing Vehicle Movements and Trends from BigQuery**")
 
 # ✅ Load BigQuery Credentials
 try:
@@ -54,7 +55,7 @@ if selected_intersection != "All":
 # ✅ Dashboard Visualizations
 st.title("🚦 Traffic Movement Analysis")
 
-st.subheader("📊 Top 10 Intersections with Highest Traffic Volume")
+st.subheader("Top 10 Intersections with Most Vehicle Movements")
 top_intersections = (
     filtered_df.groupby('INTNAME')['AUTONBL']
     .sum()
@@ -64,17 +65,30 @@ top_intersections = (
 )
 
 fig_bar = px.bar(top_intersections, x="INTNAME", y="AUTONBL",
-                 labels={"INTNAME": "Intersection", "AUTONBL": "Vehicle Count"},
+                 labels={"INTNAME": "Intersection", "AUTONBL": "Total Vehicle Count"},
                  title="Top 10 Intersections by Traffic Volume")
 st.plotly_chart(fig_bar, use_container_width=True)
 
-st.subheader("📈 Traffic Volume Trends Over Time")
+st.subheader("Trend of Vehicle Movements Over Time")
 df_time_series = filtered_df.groupby('DATE')['AUTONBL'].sum().reset_index()
 
 fig_line = px.line(df_time_series, x='DATE', y='AUTONBL',
-                   labels={'AUTONBL': 'Vehicle Count'},
-                   title="Traffic Volume Trends Over Time")
+                   labels={'AUTONBL': 'Total Vehicle Count'},
+                   title="Trend of Vehicle Movements Over Time")
 st.plotly_chart(fig_line, use_container_width=True)
+
+st.subheader("Traffic Flow and Geolocation")
+
+fig_map = px.scatter_mapbox(
+    filtered_df,
+    lat="LATITUDE", lon="LONGITUDE",
+    hover_name="INTNAME",
+    color_discrete_sequence=["red"],
+    zoom=10
+)
+fig_map.update_layout(mapbox_style="open-street-map")
+
+st.plotly_chart(fig_map, use_container_width=True, key="map_chart")
 
 # ✅ Looker Studio Integration
 st.subheader("📊 Looker Studio Interactive Report")
