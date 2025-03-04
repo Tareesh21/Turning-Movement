@@ -6,3 +6,6 @@ google-auth-httplib2
 pandas
 numpy
 plotly
+pyarrow
+db-dtypes
+
