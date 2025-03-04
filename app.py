@@ -12,20 +12,18 @@ try:
     service_account_info = st.secrets["gcp_service_account"]
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
     client = bigquery.Client(credentials=credentials, project=service_account_info["project_id"])
-    st.success("✅ Successfully connected to Google BigQuery!")
+    st.write("✅ Successfully connected to Google BigQuery!")
 except Exception as e:
     st.error(f"❌ Error loading Google Cloud credentials: {e}")
     st.stop()  # Stop execution if authentication fails
 
 # ✅ Fetch Data from BigQuery
-st.write("📡 Fetching traffic data from BigQuery...")
 try:
     query = """
     SELECT * FROM `proj-452520.TMC.TurningMC`
     LIMIT 1000
     """
     df = client.query(query).to_dataframe()
-    st.success("✅ Data fetched successfully!")
 except Exception as e:
     st.error(f"❌ Error fetching data: {e}")
     st.stop()
