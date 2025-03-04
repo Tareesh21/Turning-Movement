@@ -2,6 +2,16 @@ import streamlit as st
 from google.cloud import bigquery
 import pandas as pd
 import plotly.express as px
+from google.oauth2 import service_account
+
+# Try loading the service account credentials securely from Streamlit Secrets
+try:
+    service_account_info = st.secrets["gcp_service_account"]
+    credentials = service_account.Credentials.from_service_account_info(service_account_info)
+    client = bigquery.Client(credentials=credentials, project=service_account_info["project_id"])
+    st.write("✅ Successfully connected to Google BigQuery!")
+except Exception as e:
+    st.error(f"❌ Error loading Google Cloud credentials: {e}")
 
 client = bigquery.Client(project="proj-452520") 
 
