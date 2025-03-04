@@ -103,7 +103,7 @@ st.subheader("📊 Looker Studio Interactive Report")
 
 looker_studio_url = "https://lookerstudio.google.com/embed/reporting/8b1e4dd9-a4c8-460c-8c8e-60f1dcfe2222/page/iVM4E"
 st.markdown(
-    f'<iframe src="{looker_studio_url}" width="800" height="500px"></iframe>',
+    f'<iframe src="{looker_studio_url}" width="900" height="500px"></iframe>',
     unsafe_allow_html=True
 )
 
